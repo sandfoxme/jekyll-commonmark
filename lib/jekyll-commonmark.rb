@@ -5,7 +5,7 @@ module Jekyll
   module Converters
     class Markdown::CommonMark
       def initialize(config)
-        Jekyll::External.require_with_graceful_fail "commonmarker"
+        Jekyll::External.require_with_graceful_fail 'commonmarker/rouge'
         begin
           @options = config['commonmark']['options'].collect { |e| e.to_sym }
         rescue NoMethodError
@@ -22,7 +22,7 @@ module Jekyll
       end
 
       def convert(content)
-        CommonMarker.render_doc(content, @options).to_html
+        CommonMarker::Rouge.render_doc(content, @options).to_html
       end
     end
   end
