@@ -22,7 +22,8 @@ module Jekyll
       end
 
       def convert(content)
-        CommonMarker::Rouge.render_doc(content, @options).to_html
+        formatter = Rouge::Formatters::HTMLPygments.new(Rouge::Formatters::HTML.new)
+        CommonMarker::Rouge.render_doc(content, @options, formatter: formatter).to_html
       end
     end
   end
